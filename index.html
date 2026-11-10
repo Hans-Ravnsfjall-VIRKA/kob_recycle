@@ -9,6 +9,10 @@
 <meta property="og:description" content="Anna vil fegin gera tað rætta, men tað skeiva er nógv lættari – ella er tað?">
 <meta property="og:type" content="website">
   <script src="https://proof.virka.fo/proof-widget.js" defer></script>
+<script>
+/* Hidden start states only apply when animation will actually run */
+if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('anim');}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -31,9 +35,9 @@
   --ink:var(--brand);
   --ink-soft:var(--text);
   --rust:var(--dark-red);
-  --rust-soft:var(--light-golden);
   --font-display:"Alexandria",sans-serif;
   --font-body:"Alexandria",sans-serif;
+  --header-h:60px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:auto}
@@ -52,7 +56,7 @@ body::before{
 }
 h1,h2,h3{font-family:var(--font-display);font-weight:800;line-height:1.05;letter-spacing:-.01em}
 .display{font-size:clamp(2.6rem,7vw,6.5rem)}
-.big{font-size:clamp(2rem,5vw,4.6rem)}
+.big{font-size:clamp(1.9rem,4.6vw,4.2rem)}
 p.lede{font-size:clamp(1.1rem,1.5vw,1.35rem);max-width:34ch;color:var(--text);font-weight:300}
 p.lede strong{color:var(--dark-red);font-weight:700}
 .rust{color:var(--rust)}
@@ -60,119 +64,130 @@ p.lede strong{color:var(--dark-red);font-weight:700}
 .wrap{width:min(1180px,92vw);margin-inline:auto}
 
 /* ---------- header ---------- */
-header{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;justify-content:space-between;padding:.9rem 4vw;background:var(--brand);box-shadow:0 2px 12px rgba(0,0,0,.08)}
+header{position:fixed;top:0;left:0;right:0;z-index:40;height:var(--header-h);display:flex;align-items:center;justify-content:space-between;padding:0 4vw;background:var(--brand);box-shadow:0 2px 12px rgba(0,0,0,.08)}
 .logo img{height:36px;width:auto;display:block}
-footer .flogo{height:32px;width:auto;display:block;margin:0 auto 1.2rem}
-.progress{position:fixed;top:0;z-index:46;left:0;height:4px;width:100%;background:var(--yellow);transform-origin:left;transform:scaleX(0);z-index:45}
+.progress{position:fixed;top:0;left:0;height:4px;width:100%;background:var(--yellow);transform-origin:left;transform:scaleX(0);z-index:45}
 
 /* ---------- hero ---------- */
 .hero{min-height:100svh;display:grid;grid-template-columns:1.1fr .9fr;align-items:end;gap:2rem;padding:18vh 0 0;position:relative}
 .hero-copy{padding-bottom:12vh}
 .hero-copy h1{margin-bottom:1.4rem}
-.hero-copy h1 .w{display:inline-block;opacity:0;filter:blur(10px);transform:translateY(.25em) rotate(1.5deg)}
-.hero-copy .lede{opacity:0;transform:translateY(16px)}
-.halfyear{display:flex;align-items:center;gap:.55rem;margin-top:1.6rem;font-family:var(--font-display);font-weight:600;color:var(--ink-soft);font-size:1rem;opacity:0}
-.halfyear i{width:14px;height:14px;border-radius:50%;border:1.5px solid var(--ink-soft);display:block;transform:scale(.4);opacity:0}
-.halfyear i.f{background:var(--rust);border-color:var(--rust)}
+.hero-copy h1 .w{display:inline-block}
+.halfyear{display:flex;align-items:center;gap:.55rem;margin-top:1.6rem;font-family:var(--font-display);font-weight:600;color:var(--ink-soft);font-size:1rem}
+.halfyear i{width:14px;height:14px;border-radius:50%;border:1.5px solid var(--rust);background:var(--rust);display:block}
 .hero-art{position:relative;align-self:end;justify-self:center;width:min(100%,520px)}
-.hero-art img{width:100%;display:block;-webkit-mask-image:linear-gradient(to top,transparent 0,#000 6%);mask-image:linear-gradient(to top,transparent 0,#000 6%);opacity:0;transform:translateY(30px) scale(1.04);transform-origin:bottom center}
+.hero-art img{width:100%;height:auto;display:block;-webkit-mask-image:linear-gradient(to top,transparent 0,#000 6%);mask-image:linear-gradient(to top,transparent 0,#000 6%);transform-origin:bottom center}
 .hero-art.live img{animation:breathe 6s ease-in-out infinite}
 @keyframes breathe{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-6px) scale(1.008)}}
-.hero-shadow{position:absolute;left:12%;right:8%;bottom:-6px;height:22px;border-radius:50%;background:radial-gradient(ellipse at center,rgba(75,112,25,.22),transparent 70%);opacity:0}
-.scroll-hint{position:absolute;left:50%;bottom:1.6rem;transform:translateX(-50%);font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);display:flex;flex-direction:column;align-items:center;gap:.4rem;opacity:0}
+.hero-shadow{position:absolute;left:12%;right:8%;bottom:-6px;height:22px;border-radius:50%;background:radial-gradient(ellipse at center,rgba(75,112,25,.22),transparent 70%)}
+.scroll-hint{position:absolute;left:50%;bottom:1.6rem;transform:translateX(-50%);font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);display:flex;flex-direction:column;align-items:center;gap:.4rem}
 .scroll-hint i{width:1px;height:40px;background:var(--ink-soft);display:block;animation:drip 1.6s ease-in-out infinite}
 @keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 
-/* ---------- chapter: the bag ---------- */
-.bag-ch{display:grid;grid-template-columns:.9fr 1.1fr;gap:4rem;align-items:start;padding:10vh 0 14vh}
-.bag-sticky{position:sticky;top:10vh;height:80vh;display:flex;align-items:flex-end;justify-content:center}
-.bag-sticky img{height:min(78vh,640px);width:auto;display:block;-webkit-mask-image:linear-gradient(to top,transparent 0,#000 6%);mask-image:linear-gradient(to top,transparent 0,#000 6%)}
-.hangtags{position:absolute;inset:0;pointer-events:none}
-.hangtag{position:absolute;width:150px;opacity:0;transform-origin:50% 0;transform:translateY(-30px) rotate(-10deg)}
-.hangtag svg{width:100%;height:auto;display:block;overflow:visible}
-.hangtag.swing{animation:swing 4.5s ease-in-out infinite}
-@keyframes swing{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
-.beats{display:grid;gap:36vh;padding-top:12vh;padding-bottom:20vh}
+.anim .hero-copy h1 .w{opacity:0;filter:blur(10px);transform:translateY(.25em) rotate(1.5deg)}
+.anim .hero-copy .lede{opacity:0;transform:translateY(16px)}
+.anim .halfyear{opacity:0}
+.anim .halfyear i{transform:scale(.4);opacity:0}
+.anim .hero-art img{opacity:0;transform:translateY(30px) scale(1.04)}
+.anim .hero-shadow,.anim .scroll-hint{opacity:0}
+
+/* ---------- chapter: the bag (close-up) ---------- */
+.bag-ch{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;padding:14vh 0 4vh}
+.bag-sticky{position:sticky;top:calc(var(--header-h) + 6vh);height:calc(100svh - var(--header-h) - 12vh);display:flex;align-items:center;justify-content:center}
+.bag-fig{position:relative;height:min(100%,600px);aspect-ratio:417/460}
+.bag-img{width:100%;height:100%;display:block;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 16%,#000 93%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 16%,#000 93%,transparent 100%)}
+.strings{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.strings line{stroke-width:1.5;vector-effect:non-scaling-stroke;stroke-linecap:round}
+.strings circle{vector-effect:non-scaling-stroke}
+.tag{position:absolute;transform:translate(-50%,-100%);pointer-events:none}
+.tag span{display:block;white-space:nowrap;padding:.5rem .85rem;border-radius:8px;background:var(--beige);border:1.5px solid currentColor;font-family:var(--font-display);font-weight:600;font-size:clamp(.72rem,1.05vw,.95rem);line-height:1.2;box-shadow:0 6px 16px -8px rgba(29,29,27,.35);transform-origin:50% 100%}
+.tag.g{color:var(--brand)} .tag.r{color:var(--rust)}
+.beats{display:grid;gap:26vh;padding-top:16vh;padding-bottom:10vh}
 .beat{max-width:34ch}
 .beat .lede{margin-bottom:1rem}
-.beat .lede .mark{color:var(--rust);font-weight:600;font-family:var(--font-display);font-weight:600;font-size:1.05em;display:inline-block;transform:translateY(6px);opacity:0}
 .questions{display:grid;gap:.9rem;margin-top:2rem}
-.q{display:flex;align-items:baseline;gap:.9rem;font-family:var(--font-display);font-weight:500;font-size:clamp(1.25rem,2vw,1.7rem);color:var(--ink);opacity:0;transform:translateX(-24px)}
-.q b{font-style:normal;font-weight:900;color:var(--rust);font-size:1.4em;line-height:1;display:inline-block;transform:rotate(-8deg)}
-.reveal{opacity:0;transform:translateY(28px)}
+.q{display:flex;align-items:baseline;gap:.9rem;font-family:var(--font-display);font-weight:500;font-size:clamp(1.25rem,2vw,1.7rem);color:var(--ink)}
+.q b{font-weight:900;color:var(--rust);font-size:1.4em;line-height:1;display:inline-block;transform:rotate(-8deg)}
 
-/* ---------- pinned scene ---------- */
+.anim .reveal{opacity:0;transform:translateY(28px)}
+.anim .tag span{opacity:0;transform:translateY(12px) scale(.8) rotate(-6deg)}
+.anim .strings line,.anim .strings circle{opacity:0}
+.anim .q{opacity:0;transform:translateX(-24px)}
+
+/* ---------- pinned scene: two roads ---------- */
 .scene{height:100svh;position:relative;overflow:hidden;background:var(--paper)}
-.scene-inner{position:absolute;inset:0;width:min(1180px,92vw);margin-inline:auto}
-.scene svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-.anna-scene{position:absolute;left:0;bottom:0;height:min(62vh,560px);width:auto;-webkit-mask-image:linear-gradient(to top,transparent 0,#000 6%);mask-image:linear-gradient(to top,transparent 0,#000 6%);transform-origin:bottom left}
-.bin-scene{position:absolute;height:min(22vh,190px);width:auto;transform-origin:bottom center}
-.station{position:absolute;width:clamp(120px,14vw,220px);opacity:0;transform:scale(.7)}
-.station img{width:100%;display:block;-webkit-mask-image:radial-gradient(ellipse at center,#000 58%,transparent 76%);mask-image:radial-gradient(ellipse at center,#000 58%,transparent 76%)}
-.station figcaption{position:absolute;left:50%;bottom:-.3rem;transform:translateX(-50%);white-space:nowrap;font-family:var(--font-display);font-weight:600;font-size:.9rem;color:var(--ink-soft);background:var(--paper);padding:.1rem .6rem;border-radius:999px}
-.caption{position:absolute;left:0;width:min(92vw,720px);pointer-events:none}
-.caption h2{opacity:0}
-#cap1{top:12vh}
-#cap2{top:12vh}
-.metres{position:absolute;font-family:var(--font-display);font-weight:600;color:var(--ink);font-size:clamp(1rem,1.6vw,1.4rem);white-space:nowrap;opacity:0;transform:translateY(8px)}
-.stretch{display:inline-block;font-weight:800;letter-spacing:.02em}
-.stretch .o{display:inline-block;transform:scaleX(1);transform-origin:left center}
+.scene-inner{height:100%;width:min(1180px,92vw);margin-inline:auto;display:flex;flex-direction:column;padding:calc(var(--header-h) + 3vh) 0 2vh}
+.captions{display:grid;flex:none;min-height:2.2em;font-size:clamp(1.9rem,4.6vw,4.2rem)}
+.captions h2{grid-area:1/1;max-width:20ch;font-size:1em}
+.scene-svg{flex:1;min-height:0;width:100%;display:block;overflow:visible}
+.scene-svg text{font-family:var(--font-display)}
+.anim #cap2{opacity:0}
+html:not(.anim) .captions{display:block}
+html:not(.anim) .captions h2+h2{margin-top:.4em}
 
 /* ---------- twist ---------- */
-.twist{min-height:100svh;display:grid;place-items:center;text-align:center;padding:10vh 0;position:relative}
+.twist{min-height:100svh;display:grid;place-items:center;text-align:center;padding:14vh 0 10vh;position:relative}
 .twist h2{max-width:16ch;margin-inline:auto}
-.twist .kicker{font-family:var(--font-display);font-weight:400;font-size:clamp(1.1rem,2vw,1.6rem);color:var(--ink-soft);margin-bottom:1.6rem;opacity:0}
-.twist .word{display:inline-block;opacity:0;transform:translateY(.4em) rotate(2deg)}
-.ella{display:inline-block;color:var(--rust);position:relative;font-weight:800;opacity:0;transform:scale(.6) rotate(-6deg);transform-origin:center}
-.ella::after{content:"";position:absolute;left:0;right:0;bottom:-.08em;height:.14em;background:var(--yellow);transform:scaleX(0);transform-origin:left;border-radius:2px}
-.spark{position:absolute;width:38px;height:38px;color:var(--golden);opacity:0}
+.twist .kicker{font-family:var(--font-display);font-weight:400;font-size:clamp(1.1rem,2vw,1.6rem);color:var(--ink-soft);margin-bottom:1.6rem}
+.twist .word{display:inline-block}
+.ella{display:inline-block;color:var(--rust);position:relative;font-weight:800;transform-origin:center}
+.ella::after{content:"";position:absolute;left:0;right:0;bottom:-.08em;height:.14em;background:var(--yellow);transform:scaleX(1);transform-origin:left;border-radius:2px}
+.spark{position:absolute;width:38px;height:38px;color:var(--golden)}
+.anim .twist .kicker,.anim .spark{opacity:0}
+.anim .twist .word{opacity:0;transform:translateY(.4em) rotate(2deg)}
+.anim .ella{opacity:0;transform:scale(.6) rotate(-6deg)}
+.anim .ella::after{transform:scaleX(0)}
+.anim .ella.on::after{transform:scaleX(1);transition:transform .7s cubic-bezier(.7,0,.2,1) .2s}
 
-/* ---------- the turn (bright, denim) ---------- */
-.turn{background:var(--brand);color:#fff;padding:20vh 0;position:relative;overflow:hidden}
-.turn .wrap{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+/* ---------- the turn: the road straightens into three steps ---------- */
+.turn{background:var(--brand);color:#fff;padding:16vh 0 14vh;position:relative;overflow:hidden}
+.turn-head{display:grid;grid-template-columns:1.1fr .9fr;gap:4rem;align-items:end}
 .turn h2{font-size:clamp(2.2rem,5vw,4.4rem);color:#fff}
 .turn h2 em{color:var(--yellow);font-style:normal;font-weight:400}
-.turn p{font-size:clamp(1.05rem,1.4vw,1.25rem);color:rgba(255,255,255,.88);font-weight:300;max-width:40ch;margin-top:1.4rem}
-.steps{counter-reset:s;display:grid;gap:1.4rem}
-.step{position:relative;padding:1.4rem 1.4rem 1.4rem 4.4rem;border:0;border-radius:16px;background:var(--beige);color:var(--text);opacity:0;transform:translateX(40px)}
-.step::before{counter-increment:s;content:counter(s);position:absolute;left:1.2rem;top:1.15rem;width:2.2rem;height:2.2rem;border-radius:50%;background:var(--yellow);color:var(--text);display:grid;place-items:center;font-family:var(--font-display);font-weight:800;font-size:1.05rem}
-.step .ans{display:block;font-family:var(--font-display);font-weight:600;font-size:.9rem;color:var(--dark-red);margin-bottom:.3rem}
-.step h3{font-size:1.3rem;margin-bottom:.35rem;color:var(--brand)}
-.step p{margin:0;font-size:1rem;color:var(--text);font-weight:300}
-.cta{display:inline-flex;align-items:center;gap:.8rem;margin-top:2.4rem;padding:1.05rem 1.6rem;border-radius:0;background:var(--yellow);color:var(--text);font-weight:800;text-decoration:none;font-size:1.05rem;transition:transform .25s cubic-bezier(.2,.9,.3,1.3),box-shadow .25s}
+.turn p{font-size:clamp(1.05rem,1.4vw,1.25rem);color:rgba(255,255,255,.9);font-weight:300;max-width:42ch}
+.road{display:block;width:100%;height:auto;margin:7vh 0 1.2rem;overflow:visible}
+.road text{font-family:var(--font-display);font-weight:800}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+.step{position:relative;padding:1.5rem;border-radius:16px;background:var(--beige);color:var(--text)}
+.step .num{display:none;width:2.2rem;height:2.2rem;border-radius:50%;background:var(--yellow);color:var(--text);place-items:center;font-family:var(--font-display);font-weight:800;font-size:1.05rem;margin-bottom:.8rem}
+.step .ans{display:block;font-family:var(--font-display);font-weight:600;font-size:.9rem;color:var(--dark-red);margin-bottom:.35rem}
+.step h3{font-size:1.3rem;margin-bottom:.4rem;color:var(--brand);line-height:1.15}
+.step p{margin:0;font-size:1rem;color:var(--text);font-weight:300;max-width:none}
+.turn-foot{display:grid;grid-template-columns:1.1fr .9fr;gap:4rem;align-items:center;margin-top:9vh}
+.turn-foot .cta{justify-self:start}
+.cta{display:inline-flex;align-items:center;gap:.8rem;padding:1.05rem 1.6rem;border-radius:0;background:var(--yellow);color:var(--text);font-weight:800;text-decoration:none;font-size:1.05rem;transition:transform .25s cubic-bezier(.2,.9,.3,1.3),box-shadow .25s}
 .cta:hover{transform:translateY(-3px) rotate(-1deg);box-shadow:0 14px 30px -10px rgba(0,0,0,.5)}
+.cta:focus-visible{outline:3px solid #fff;outline-offset:3px}
 .cta svg{width:1.1em;height:1.1em}
-.turn-bg{position:absolute;inset:0;pointer-events:none}
-.turn-bg path{stroke:rgba(255,255,255,.14);stroke-width:2;fill:none;stroke-dasharray:6 10}
+.anim .step{opacity:0;transform:translateY(36px)}
 
 /* ---------- footer ---------- */
 footer{padding:3.5rem 0;text-align:center;background:var(--brand-dark);color:#fff;font-size:.95rem;font-weight:300}
 footer strong{font-family:var(--font-display);font-weight:700;font-size:1.15rem;color:#fff;display:block;margin-bottom:.4rem}
-footer a{color:var(--light-golden)}
 
 /* ---------- mobile ---------- */
 @media (max-width:820px){
+  :root{--header-h:48px}
+  .logo img{height:28px}
   .hero{grid-template-columns:1fr;padding-top:14vh;align-items:start}
   .hero-copy{padding-bottom:2rem}
   .hero-art{width:min(80vw,380px)}
-  .bag-ch{grid-template-columns:1fr;gap:1rem}
-  .bag-sticky{position:sticky;top:0;height:46vh;align-items:flex-end}
-  .bag-sticky img{height:44vh}
-  .beats{gap:22vh;padding-top:4vh}
-  .hangtag{width:110px}
-  .anna-scene{height:34vh;left:-6vw}
-  .bin-scene{height:14vh}
-  .station{width:24vw}
-  .caption{width:92vw}
-  .station figcaption{font-size:.75rem}
-  #cap1,#cap2{top:10vh}
-  .turn .wrap{grid-template-columns:1fr;gap:3rem}
-  header{padding:.7rem 4vw}
-  .logo img{height:28px}
-}
-@media (prefers-reduced-motion:reduce){
-  .reveal,.hero-copy .lede,.hero-copy h1 .w,.halfyear,.halfyear i,.hero-art img,.hangtag,.q,.beat .mark,.station,.caption h2,.metres,.twist .kicker,.twist .word,.ella,.step,.scroll-hint{opacity:1!important;transform:none!important}
-  .hero-copy h1 .w{filter:none}
+  .bag-ch{grid-template-columns:1fr;gap:0;padding:8vh 0 4vh}
+  .bag-sticky{top:var(--header-h);height:46svh;z-index:1;background:linear-gradient(to bottom,var(--paper) 88%,transparent)}
+  .bag-fig{height:calc(100% - 3.4rem);margin-top:3rem}
+  .tag span{font-size:.7rem;padding:.35rem .6rem}
+  .beats{gap:20vh;padding-top:8vh;padding-bottom:6vh}
+  .scroll-hint{display:none}
+  .spark{top:20%!important;right:4%!important}
+  .beat{max-width:none}
+  .captions{min-height:3.3em}
+  .turn{padding:12vh 0 10vh}
+  .turn-head,.turn-foot{grid-template-columns:1fr;gap:1.6rem}
+  .road{margin:4vh 0 1rem}
+  .steps{grid-template-columns:1fr}
+  .step{padding:1.3rem 1.3rem 1.3rem 4.2rem}
+  .step .num{display:grid;position:absolute;left:1.1rem;top:1.2rem;margin:0}
+  .turn-foot{margin-top:6vh}
 }
 </style>
 </head>
@@ -183,7 +198,7 @@ footer a{color:var(--light-golden)}
   <a class="logo" href="https://www.kob.fo"><img src="img/logo-main.png" alt="Kommunala Brennistøðin" width="592" height="72"></a>
 </header>
 
-<!-- ============ HERO ============ -->
+<!-- ============ 1. HERO: Anna og posin ============ -->
 <section class="hero wrap" id="hero">
   <div class="hero-copy">
     <h1 class="display">
@@ -192,7 +207,7 @@ footer a{color:var(--light-golden)}
       <span class="w rust">klæðum</span>
     </h1>
     <p class="lede">Hetta er Anna. Og hetta er posin við klæðum, sum hevur ligið til fortreð í eitt hálvt ár.</p>
-    <div class="halfyear" aria-hidden="true"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><span>eitt hálvt ár</span></div>
+    <div class="halfyear" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><span>eitt hálvt ár</span></div>
   </div>
   <figure class="hero-art" id="heroArt">
     <img src="img/anna.png" alt="Anna stendur hugsandi við ein svartan posa fullan av klæðum" width="417" height="740">
@@ -201,20 +216,21 @@ footer a{color:var(--light-golden)}
   <div class="scroll-hint">Scrolla<i></i></div>
 </section>
 
-<!-- ============ THE BAG ============ -->
+<!-- ============ 2. POSIN: close-up, hvat er í honum ============ -->
 <section class="chapter wrap bag-ch" id="posin">
   <div class="bag-sticky">
-    <img src="img/anna.png" alt="" id="bagAnna">
-    <div class="hangtags" aria-hidden="true">
-      <div class="hangtag" id="tag1" style="left:6%;top:52%">
-        <svg viewBox="0 0 150 90"><path d="M75 -30 L75 4" stroke="#4B7019" stroke-width="1.5" fill="none"/><path d="M4 12 Q4 4 12 4 H138 Q146 4 146 12 V78 Q146 86 138 86 H12 Q4 86 4 78 Z" fill="#FAF2E9" stroke="#4B7019" stroke-width="1.5"/><circle cx="75" cy="12" r="3" fill="none" stroke="#4B7019" stroke-width="1.5"/><text x="75" y="52" text-anchor="middle" font-family="Alexandria,sans-serif" font-weight="600" font-size="15" fill="#4B7019">Passar ikki longur</text></svg>
-      </div>
-      <div class="hangtag" id="tag2" style="left:38%;top:44%">
-        <svg viewBox="0 0 150 90"><path d="M75 -30 L75 4" stroke="#814D4B" stroke-width="1.5" fill="none"/><path d="M4 12 Q4 4 12 4 H138 Q146 4 146 12 V78 Q146 86 138 86 H12 Q4 86 4 78 Z" fill="#FAF2E9" stroke="#814D4B" stroke-width="1.5"/><circle cx="75" cy="12" r="3" fill="none" stroke="#814D4B" stroke-width="1.5"/><text x="75" y="52" text-anchor="middle" font-family="Alexandria,sans-serif" font-weight="600" font-size="15" fill="#814D4B">Slitin</text></svg>
-      </div>
-      <div class="hangtag" id="tag3" style="left:20%;top:64%">
-        <svg viewBox="0 0 150 90"><path d="M75 -30 L75 4" stroke="#4B7019" stroke-width="1.5" fill="none"/><path d="M4 12 Q4 4 12 4 H138 Q146 4 146 12 V78 Q146 86 138 86 H12 Q4 86 4 78 Z" fill="#FAF2E9" stroke="#4B7019" stroke-width="1.5"/><circle cx="75" cy="12" r="3" fill="none" stroke="#4B7019" stroke-width="1.5"/><text x="75" y="52" text-anchor="middle" font-family="Alexandria,sans-serif" font-weight="600" font-size="15" fill="#4B7019">Ikki „hon“ longur</text></svg>
-      </div>
+    <div class="bag-fig" id="bagFig" aria-hidden="true">
+      <svg class="bag-img" viewBox="0 250 417 460" preserveAspectRatio="xMidYMid slice">
+        <image href="img/anna.png" x="0" y="0" width="417" height="740"/>
+      </svg>
+      <svg class="strings" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <line id="str1" x1="9" y1="30" x2="11.5" y2="56" stroke="#4B7019"/><circle id="pin1" cx="11.5" cy="56" r=".9" fill="#4B7019"/>
+        <line id="str2" x1="28" y1="18" x2="27" y2="39" stroke="#814D4B"/><circle id="pin2" cx="27" cy="39" r=".9" fill="#814D4B"/>
+        <line id="str3" x1="47" y1="6" x2="49" y2="32" stroke="#4B7019"/><circle id="pin3" cx="49" cy="32" r=".9" fill="#4B7019"/>
+      </svg>
+      <div class="tag g" id="tag1" style="left:9%;top:30%"><span>Passar ikki longur</span></div>
+      <div class="tag r" id="tag2" style="left:28%;top:18%"><span>Slitin</span></div>
+      <div class="tag g" id="tag3" style="left:47%;top:6%"><span>Ikki „hon“ longur</span></div>
     </div>
   </div>
 
@@ -237,38 +253,18 @@ footer a{color:var(--light-golden)}
   </div>
 </section>
 
-<!-- ============ PINNED SCENE ============ -->
+<!-- ============ 3. TVEIR VEGIR: 10 metrar móti langa vegnum ============ -->
 <section class="scene" id="scene">
   <div class="scene-inner">
-
-    <div class="caption" id="cap1">
-      <h2 class="big green">Ruskspannin er bara tíggju metrar vekk.</h2>
+    <div class="captions">
+      <h2 class="green" id="cap1">Ruskspannin er bara tíggju metrar vekk.</h2>
+      <h2 class="rust" id="cap2">Rætta valið kennist nógv longri vekk.</h2>
     </div>
-    <div class="caption" id="cap2">
-      <h2 class="big rust">Rætta valið kennist <span class="stretch">n<span class="o">ó</span>gv</span> longri vekk.</h2>
-    </div>
-
-    <svg viewBox="0 0 1180 700" preserveAspectRatio="none" aria-hidden="true">
-      <!-- 10 m line -->
-      <path id="shortPath" d="M 300 560 L 520 560" stroke="#4B7019" stroke-width="4" stroke-dasharray="1 14" stroke-linecap="round" fill="none"/>
-      <circle id="dotStart" cx="300" cy="560" r="7" fill="#4B7019" opacity="0"/>
-      <circle id="dotBin" cx="520" cy="560" r="7" fill="#814D4B" opacity="0"/>
-      <!-- long winding route -->
-      <path id="longPath" d="M 520 560 C 640 560 700 540 760 470 C 830 390 900 420 940 340 C 980 260 1040 250 1080 190 C 1110 150 1090 110 1040 100" stroke="#814D4B" stroke-width="5" stroke-dasharray="1 16" stroke-linecap="round" fill="none"/>
-      <path id="longPath2" d="M 940 340 C 1000 380 1080 380 1130 420 C 1180 460 1150 520 1100 540" stroke="#814D4B" stroke-width="5" stroke-dasharray="1 16" stroke-linecap="round" fill="none"/>
-    </svg>
-
-    <img class="anna-scene" src="img/anna.png" alt="">
-    <img class="bin-scene" id="bin" src="img/bin.png" alt="Ruskspann" style="left:calc(44% - 40px);bottom:12vh">
-    <div class="metres" id="metres" style="left:32%;bottom:calc(12vh + 130px)">10 metrar</div>
-
-    <figure class="station" id="st1" style="right:3%;top:8vh"><img src="img/sortering.png" alt="Sortering"><figcaption>Sortering</figcaption></figure>
-    <figure class="station" id="st2" style="right:14%;top:42vh"><img src="img/clothes.png" alt="Klæði á stong"><figcaption>Endurnýtsla</figcaption></figure>
-    <figure class="station" id="st3" style="right:2%;top:60vh"><img src="img/container.png" alt="Innsavning av tekstil"><figcaption>Innsavning av tekstil</figcaption></figure>
+    <svg class="scene-svg" id="sceneSvg" role="img" aria-label="Anna stendur við posan. Ruskspannin er tíggju metrar vekk. Vegurin til innsavning av tekstili, sortering og endurnýtslu sær nógv longri út."></svg>
   </div>
 </section>
 
-<!-- ============ TWIST ============ -->
+<!-- ============ 4. VENDINGIN ============ -->
 <section class="twist" id="twist">
   <div class="wrap">
     <p class="kicker">Og so stendur hon har.</p>
@@ -277,43 +273,49 @@ footer a{color:var(--light-golden)}
       <span class="word">men</span> <span class="word">tað</span> <span class="word">skeiva</span> <span class="word">er</span> <span class="word">nógv</span> <span class="word">lættari</span>
       <br><span class="ella">ella er tað?</span>
     </h2>
-    <svg class="spark" id="spark" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" style="right:12%;top:38%">
+    <svg class="spark" id="spark" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" style="right:12%;top:38%" aria-hidden="true">
       <path d="M8 32 L16 22"/><path d="M14 36 L20 26"/><path d="M4 26 L12 20"/>
     </svg>
   </div>
 </section>
 
-<!-- ============ THE TURN ============ -->
+<!-- ============ 5. LOYSNIN: langi vegurin verður til trý stig ============ -->
 <section class="turn" id="loysn">
-  <svg class="turn-bg" viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true">
-    <path d="M -50 700 C 200 600 300 850 520 720 C 740 590 800 380 1050 420 C 1300 460 1350 220 1500 150"/>
-  </svg>
   <div class="wrap">
-    <div>
+    <div class="turn-head">
       <h2 class="reveal">Nei, tað er <em>ikki</em> longri vekk.</h2>
       <p class="reveal">Tað sum kennist sum ein langur vegur, er í veruleikanum bara trý stig. Og ein posi ger ein mun, tí klæði eru ikki rusk.</p>
-      <p class="reveal">Klæði, sum ikki passa longur, kunnu fáa nýtt lív hjá øðrum. Klæði, sum eru slitin, kunnu verða til nýtt tilfar. Bert tað, sum onki kann nýtast til, hoyrir heima í ruskspannini.</p>
-      <a class="cta reveal" href="#">
-        Finn nærmasta innsavningarstað
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
     </div>
+
+    <svg class="road" id="road" aria-hidden="true"></svg>
+
     <div class="steps">
       <div class="step">
+        <span class="num">1</span>
         <span class="ans">Hvat kann latast inn?</span>
         <h3>Legg tað í ein posa</h3>
         <p>Reint og turt tekstil – klæði, skógvar, klútar og lakan. Tað má gjarna vera slitið.</p>
       </div>
       <div class="step">
+        <span class="num">2</span>
         <span class="ans">Hvar skal hon fara við tí?</span>
         <h3>Far við posanum í innsavningina</h3>
         <p>Lat posan í eina innsavningarbingju, ella lat hann inn á sorteringarstøðini.</p>
       </div>
       <div class="step">
+        <span class="num">3</span>
         <span class="ans">Ger ein lítil posi mun?</span>
         <h3>Vit taka tað haðani</h3>
         <p>Tað, sum kann brúkast, fer víðari. Tað, sum ikki kann, verður til nýtt tilfar.</p>
       </div>
+    </div>
+
+    <div class="turn-foot">
+      <p class="reveal">Klæði, sum ikki passa longur, kunnu fáa nýtt lív hjá øðrum. Klæði, sum eru slitin, kunnu verða til nýtt tilfar. Bert tað, sum onki kann nýtast til, hoyrir heima í ruskspannini.</p>
+      <a class="cta reveal" href="#">
+        Finn nærmasta innsavningarstað
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
     </div>
   </div>
 </section>
@@ -327,108 +329,301 @@ footer a{color:var(--light-golden)}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
 (function(){
-  if(!window.gsap){return;}
-  gsap.registerPlugin(ScrollTrigger);
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(reduced){ return; }
+  var NS='http://www.w3.org/2000/svg';
+  var MOBILE='(max-width:820px)';
+  var C={green:'#4B7019',rust:'#814D4B',beige:'#FAF2E9',yellow:'#FFD900',text:'#1d1d1b'};
 
-  /* progress bar */
+  /* =====================================================================
+     SCENE LAYOUTS. Everything in the scene (Anna, bin, both roads, the three
+     stops) lives in ONE svg coordinate system, so the roads always end exactly
+     at the things they lead to, at every screen size.
+     ===================================================================== */
+  var LAYOUTS={
+    desktop:{
+      vb:[1200,620],
+      anna:{x:0,y:105,h:500},
+      bin:{x:470,y:432,h:150},
+      short:'M300,575 L466,575',
+      metres:{x:383,y:552,size:21},
+      long:'M300,575 C340,520 330,430 420,395 C490,370 540,385 610,365 C690,345 730,420 720,490 C710,560 800,592 890,570 C985,548 1075,500 1060,420 C1048,350 960,330 975,265 C988,215 1030,202 1085,210',
+      stops:[
+        {img:'container',label:'Innsavning av tekstil',node:[610,365],w:215,h:149,labelSize:18},
+        {img:'sortering',label:'Sortering',node:[890,570],w:250,h:146,labelSize:18},
+        {img:'clothes',label:'Endurnýtsla',node:[1085,210],w:215,h:152,labelSize:18}
+      ],
+      dot:9,badge:14,stroke:5,gap:16
+    },
+    mobile:{
+      vb:[390,600],
+      anna:{x:0,y:335,h:250},
+      bin:{x:262,y:493,h:78},
+      short:'M150,560 L260,560',
+      metres:{x:205,y:545,size:13},
+      long:'M150,560 C172,520 160,468 205,455 C240,444 268,452 300,445 C262,436 222,400 208,345 C198,300 165,284 120,288 C62,292 16,244 20,182 C24,122 108,112 170,126 C212,136 244,152 285,150',
+      stops:[
+        {img:'container',label:'Innsavning av tekstil',node:[300,445],w:100,h:69,labelSize:11.5},
+        {img:'sortering',label:'Sortering',node:[120,288],w:128,h:75,labelSize:11.5},
+        {img:'clothes',label:'Endurnýtsla',node:[285,150],w:118,h:83,labelSize:11.5}
+      ],
+      dot:6.5,badge:10.5,stroke:3.5,gap:11
+    }
+  };
+
+  function el(name,attrs,parent){
+    var n=document.createElementNS(NS,name);
+    for(var k in attrs){ n.setAttribute(k,attrs[k]); }
+    if(parent){ parent.appendChild(n); }
+    return n;
+  }
+
+  /* Build the scene svg for one layout. Returns handles for the animation. */
+  function buildScene(L){
+    var svg=document.getElementById('sceneSvg');
+    while(svg.firstChild){ svg.removeChild(svg.firstChild); }
+    svg.setAttribute('viewBox','0 0 '+L.vb[0]+' '+L.vb[1]);
+    svg.setAttribute('preserveAspectRatio','xMidYMax meet');
+
+    var defs=el('defs',{},svg);
+    /* soft edge for the stop illustrations */
+    var rg=el('radialGradient',{id:'softEdge'},defs);
+    el('stop',{offset:'62%','stop-color':'#fff','stop-opacity':1},rg);
+    el('stop',{offset:'100%','stop-color':'#fff','stop-opacity':0},rg);
+    /* fade Anna's floor out at the bottom */
+    var lg=el('linearGradient',{id:'floorFade',x1:0,y1:0,x2:0,y2:1},defs);
+    el('stop',{offset:'92%','stop-color':'#fff','stop-opacity':1},lg);
+    el('stop',{offset:'100%','stop-color':'#fff','stop-opacity':0},lg);
+    /* reveal masks: the dotted roads stay dotted while they are drawn */
+    var mShort=el('mask',{id:'mShort',maskUnits:'userSpaceOnUse',x:0,y:0,width:L.vb[0],height:L.vb[1]},defs);
+    var revShort=el('path',{d:L.short,fill:'none',stroke:'#fff','stroke-width':L.stroke*4,'stroke-linecap':'round'},mShort);
+    var mLong=el('mask',{id:'mLong',maskUnits:'userSpaceOnUse',x:0,y:0,width:L.vb[0],height:L.vb[1]},defs);
+    var revLong=el('path',{d:L.long,fill:'none',stroke:'#fff','stroke-width':L.stroke*4,'stroke-linecap':'round'},mLong);
+
+    /* stops (drawn first so the road and badges sit on top) */
+    var stops=L.stops.map(function(s,i){
+      var g=el('g',{'class':'stop'},svg);
+      var ix=s.node[0]-s.w/2, iy=s.node[1]-L.badge-8-s.h;
+      var mk=el('mask',{id:'stopMask'+i,maskUnits:'userSpaceOnUse',x:ix,y:iy,width:s.w,height:s.h},defs);
+      el('ellipse',{cx:s.node[0],cy:iy+s.h/2,rx:s.w/2,ry:s.h/2*1.15,fill:'url(#softEdge)'},mk);
+      el('image',{href:'img/'+s.img+'.png',x:ix,y:iy,width:s.w,height:s.h,mask:'url(#stopMask'+i+')'},g);
+      var t=el('text',{x:s.node[0],y:iy-6,'text-anchor':'middle','font-weight':600,'font-size':s.labelSize,fill:C.text},g);
+      t.textContent=s.label;
+      return g;
+    });
+
+    /* roads */
+    var shortPath=el('path',{d:L.short,fill:'none',stroke:C.green,'stroke-width':L.stroke,'stroke-linecap':'round','stroke-dasharray':'0.1 '+L.gap,mask:'url(#mShort)'},svg);
+    var longPath=el('path',{d:L.long,fill:'none',stroke:C.rust,'stroke-width':L.stroke,'stroke-linecap':'round','stroke-dasharray':'0.1 '+L.gap,mask:'url(#mLong)'},svg);
+
+    /* Anna + bin */
+    var aw=L.anna.h*417/740;
+    var mA=el('mask',{id:'mAnna',maskUnits:'userSpaceOnUse',x:L.anna.x,y:L.anna.y,width:aw,height:L.anna.h},defs);
+    el('rect',{x:L.anna.x,y:L.anna.y,width:aw,height:L.anna.h,fill:'url(#floorFade)'},mA);
+    var anna=el('image',{href:'img/anna.png',x:L.anna.x,y:L.anna.y,width:aw,height:L.anna.h,mask:'url(#mAnna)'},svg);
+    var bin=el('image',{href:'img/bin.png',x:L.bin.x,y:L.bin.y,width:L.bin.h*150/165,height:L.bin.h},svg);
+
+    var metres=el('text',{x:L.metres.x,y:L.metres.y,'text-anchor':'middle','font-weight':600,'font-size':L.metres.size,fill:C.green},svg);
+    metres.textContent='10 metrar';
+
+    /* question badges on the long road: each stop is something Anna does not know yet */
+    var badges=L.stops.map(function(s){
+      var g=el('g',{'class':'badge'},svg);
+      el('circle',{cx:s.node[0],cy:s.node[1],r:L.badge,fill:C.rust,stroke:C.beige,'stroke-width':L.stroke*.6},g);
+      var t=el('text',{x:s.node[0],y:s.node[1]+L.badge*.42,'text-anchor':'middle','font-weight':800,'font-size':L.badge*1.25,fill:C.beige},g);
+      t.textContent='?';
+      return g;
+    });
+
+    /* start point + the travelling bag marker */
+    var start=longPath.getPointAtLength(0);
+    var startDot=el('circle',{cx:start.x,cy:start.y,r:L.dot*.8,fill:C.green},svg);
+    var marker=el('circle',{cx:start.x,cy:start.y,r:L.dot,fill:C.text,stroke:C.beige,'stroke-width':L.stroke*.6},svg);
+
+    /* where along the long road each stop sits (0..1), found by sampling */
+    var total=longPath.getTotalLength();
+    var stopAt=L.stops.map(function(s){
+      var best=0,bd=1e9;
+      for(var i=0;i<=400;i++){
+        var p=longPath.getPointAtLength(total*i/400);
+        var d=(p.x-s.node[0])*(p.x-s.node[0])+(p.y-s.node[1])*(p.y-s.node[1]);
+        if(d<bd){bd=d;best=i/400;}
+      }
+      return best;
+    });
+
+    return {svg:svg,anna:anna,bin:bin,metres:metres,shortPath:shortPath,longPath:longPath,revShort:revShort,revLong:revLong,
+            stops:stops,badges:badges,startDot:startDot,marker:marker,stopAt:stopAt,
+            shortLen:shortPath.getTotalLength(),longLen:total};
+  }
+
+  /* =====================================================================
+     THE ROAD THAT STRAIGHTENS. The same winding road from the scene, now on
+     green: as you scroll it pulls tight into a short straight line and the
+     three question marks turn into steps 1, 2, 3.
+     ===================================================================== */
+  var ROADS={
+    desktop:{vb:[1200,210],mid:120,xs:[30,200,400,600,800,1000,1170],dy:[0,-82,74,-86,78,-72,0],dx:[0,46,-54,34,-44,-30,0],k:72,r:19,stroke:4,gap:14,font:20},
+    mobile:{vb:[390,150],mid:84,xs:[14,65,130,195,260,325,376],dy:[0,-54,50,-58,52,-48,0],dx:[0,14,-16,10,-14,-10,0],k:26,r:14,stroke:3,gap:10,font:15}
+  };
+  function roadPoints(R,t){
+    var u=1-t;
+    return R.xs.map(function(x,i){ return [x+R.dx[i]*u, R.mid+R.dy[i]*u]; });
+  }
+  function roadD(R,t){
+    var p=roadPoints(R,t), d='M'+p[0][0].toFixed(1)+','+p[0][1].toFixed(1);
+    for(var i=1;i<p.length;i++){
+      d+=' C'+(p[i-1][0]+R.k).toFixed(1)+','+p[i-1][1].toFixed(1)+' '+(p[i][0]-R.k).toFixed(1)+','+p[i][1].toFixed(1)+' '+p[i][0].toFixed(1)+','+p[i][1].toFixed(1);
+    }
+    return d;
+  }
+  function buildRoad(R){
+    var svg=document.getElementById('road');
+    while(svg.firstChild){ svg.removeChild(svg.firstChild); }
+    svg.setAttribute('viewBox','0 0 '+R.vb[0]+' '+R.vb[1]);
+    var path=el('path',{fill:'none',stroke:'rgba(255,255,255,.75)','stroke-width':R.stroke,'stroke-linecap':'round','stroke-dasharray':'0.1 '+R.gap},svg);
+    var nodes=[1,3,5].map(function(idx,n){
+      var g=el('g',{},svg);
+      var q=el('g',{},g);
+      el('circle',{r:R.r,fill:C.beige},q);
+      var qt=el('text',{y:R.font*.36,'text-anchor':'middle','font-size':R.font,fill:C.rust},q); qt.textContent='?';
+      var s=el('g',{},g);
+      el('circle',{r:R.r,fill:C.yellow},s);
+      var st=el('text',{y:R.font*.36,'text-anchor':'middle','font-size':R.font,fill:C.text},s); st.textContent=String(n+1);
+      return {g:g,q:q,s:s,idx:idx};
+    });
+    function render(t){
+      path.setAttribute('d',roadD(R,t));
+      var p=roadPoints(R,t);
+      var k=Math.min(1,Math.max(0,(t-.55)/.3));           /* question → number late in the move */
+      nodes.forEach(function(n){
+        n.g.setAttribute('transform','translate('+p[n.idx][0].toFixed(1)+','+p[n.idx][1].toFixed(1)+')');
+        n.q.setAttribute('opacity',1-k);
+        n.s.setAttribute('opacity',k);
+      });
+    }
+    return {render:render};
+  }
+
+  /* =====================================================================
+     NO ANIMATION (reduced motion, or the animation library did not load):
+     build both drawings in their finished state and stop.
+     ===================================================================== */
+  var isMobile=window.matchMedia(MOBILE).matches;
+  var canAnimate=!!(window.gsap&&window.ScrollTrigger)&&document.documentElement.classList.contains('anim');
+  if(!canAnimate){
+    document.documentElement.classList.remove('anim');
+    var s0=buildScene(isMobile?LAYOUTS.mobile:LAYOUTS.desktop);
+    s0.marker.setAttribute('opacity',0);
+    buildRoad(isMobile?ROADS.mobile:ROADS.desktop).render(1);
+    return;
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ---------- parts that do not depend on the layout ---------- */
   gsap.to('#progress',{scaleX:1,ease:'none',scrollTrigger:{start:0,end:'max',scrub:.3}});
 
-  /* hero intro: slow, layered, no slam */
-  const intro = gsap.timeline({defaults:{ease:'power2.out'}});
-  intro.to('.hero-art img',{opacity:1,y:0,scale:1,duration:1.8,ease:'power2.out'},0)
+  var intro=gsap.timeline({defaults:{ease:'power2.out'}});
+  intro.to('.hero-art img',{opacity:1,y:0,scale:1,duration:1.8},0)
        .to('.hero-shadow',{opacity:1,duration:1.2},.6)
        .to('.hero-copy h1 .w',{opacity:1,filter:'blur(0px)',y:0,rotate:0,duration:1.1,stagger:.14},.3)
        .to('.hero-copy .lede',{opacity:1,y:0,duration:1},'-=.5')
        .to('.halfyear',{opacity:1,duration:.5},'-=.3')
        .to('.halfyear i',{opacity:1,scale:1,duration:.35,stagger:.18,ease:'back.out(3)'},'<')
        .to('.scroll-hint',{opacity:1,duration:.6},'-=.2')
-       .add(()=>document.getElementById('heroArt').classList.add('live'));
+       .add(function(){ document.getElementById('heroArt').classList.add('live'); });
 
-  /* hero parallax on the way out */
   gsap.to('.hero-copy',{y:-60,opacity:.2,ease:'none',scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:true}});
   gsap.to('#heroArt',{y:90,ease:'none',scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:true}});
 
-  /* generic reveals */
-  gsap.utils.toArray('.reveal').forEach(el=>{
-    gsap.to(el,{opacity:1,y:0,duration:1,ease:'power3.out',
-      scrollTrigger:{trigger:el,start:'top 80%',toggleActions:'play none none reverse'}});
+  gsap.utils.toArray('.reveal').forEach(function(node){
+    gsap.to(node,{opacity:1,y:0,duration:1,ease:'power3.out',
+      scrollTrigger:{trigger:node,start:'top 82%',toggleActions:'play none none reverse'}});
   });
 
-  /* bag chapter: hangtags appear as the text names them */
-  const showTag = (id, trig) => {
-    const el=document.getElementById(id);
-    gsap.to(el,{opacity:1,y:0,rotate:0,duration:.9,ease:'elastic.out(1,.55)',
-      scrollTrigger:{trigger:trig,start:'top 70%',toggleActions:'play none none reverse',
-        onEnter:()=>el.classList.add('swing'),onLeaveBack:()=>el.classList.remove('swing')}});
-  };
-  showTag('tag1','#beat2');
-  gsap.to('#tag2',{opacity:1,y:0,rotate:0,duration:.9,delay:.25,ease:'elastic.out(1,.55)',
-    scrollTrigger:{trigger:'#beat2',start:'top 70%',toggleActions:'play none none reverse',
-      onEnter:()=>document.getElementById('tag2').classList.add('swing'),onLeaveBack:()=>document.getElementById('tag2').classList.remove('swing')}});
-  gsap.to('#tag3',{opacity:1,y:0,rotate:0,duration:.9,delay:.5,ease:'elastic.out(1,.55)',
-    scrollTrigger:{trigger:'#beat2',start:'top 70%',toggleActions:'play none none reverse',
-      onEnter:()=>document.getElementById('tag3').classList.add('swing'),onLeaveBack:()=>document.getElementById('tag3').classList.remove('swing')}});
+  /* the bag: each label is tied to its garment, one after the other */
+  var tags=gsap.timeline({scrollTrigger:{trigger:'#beat2',start:'top 72%',toggleActions:'play none none reverse'}});
+  [1,2,3].forEach(function(n,i){
+    tags.to('#pin'+n,{opacity:1,duration:.2},i*.45)
+        .to('#str'+n,{opacity:1,duration:.3},i*.45)
+        .to('#tag'+n+' span',{opacity:1,y:0,scale:1,rotate:i===1?2:-2,duration:.7,ease:'back.out(2)'},i*.45+.1);
+  });
 
-  /* Anna leans in slightly as we get to her dilemma */
-  gsap.fromTo('#bagAnna',{x:0},{x:-24,ease:'none',scrollTrigger:{trigger:'#posin',start:'top top',end:'bottom bottom',scrub:true}});
-
-  /* the three open questions: one by one, they are answered later in the page */
   gsap.to('.q',{opacity:1,x:0,duration:.7,stagger:.35,ease:'power3.out',
-    scrollTrigger:{trigger:'.questions',start:'top 78%',toggleActions:'play none none reverse'}});
+    scrollTrigger:{trigger:'.questions',start:'top 80%',toggleActions:'play none none reverse'}});
 
-  /* ---------- pinned scene ---------- */
-  const prep = sel => { const p=document.querySelector(sel); const L=p.getTotalLength(); p.style.strokeDasharray=`${L}`; p.style.strokeDashoffset=L; return L; };
-  const l1 = prep('#shortPath'), l2 = prep('#longPath'), l3 = prep('#longPath2');
-
-  gsap.set('.anna-scene',{x:-40,opacity:0});
-  gsap.set('#bin',{opacity:0,y:20});
-
-  const sc = gsap.timeline({
-    scrollTrigger:{trigger:'#scene',start:'top top',end:'+=320%',pin:true,scrub:.6,anticipatePin:1}
-  });
-
-  sc.to('.anna-scene',{x:0,opacity:1,duration:1},0)
-    .to('#dotStart',{opacity:1,duration:.3},.4)
-    .to('#shortPath',{strokeDashoffset:0,strokeDasharray:'1 14',duration:1.2,ease:'none'},.6)
-    .to('#bin',{opacity:1,y:0,duration:.6,ease:'back.out(1.6)'},1.4)
-    .to('#dotBin',{opacity:1,duration:.3},1.5)
-    .to('#metres',{opacity:1,y:0,duration:.5},1.6)
-    .to('#cap1 h2',{opacity:1,duration:.8},1.3)
-    .to('#bin',{rotate:-4,duration:.3,yoyo:true,repeat:1},2.1)
-
-    // hold, then the long route
-    .to('#cap1 h2',{opacity:0,y:-20,duration:.6},3.2)
-    .to('#cap2 h2',{opacity:1,duration:.8},3.6)
-    .to('#longPath',{strokeDashoffset:0,strokeDasharray:'1 16',duration:3,ease:'none'},3.6)
-    .to('#st2',{opacity:1,scale:1,duration:.6,ease:'back.out(1.8)'},4.9)
-    .to('#longPath2',{strokeDashoffset:0,strokeDasharray:'1 16',duration:1.6,ease:'none'},5.0)
-    .to('#st3',{opacity:1,scale:1,duration:.6,ease:'back.out(1.8)'},6.2)
-    .to('#st1',{opacity:1,scale:1,duration:.6,ease:'back.out(1.8)'},6.5)
-    // the word stretches as the route grows
-    .to('.stretch .o',{scaleX:4.2,marginRight:'1.9em',duration:3.2,ease:'none'},3.6)
-    .to('.stretch',{letterSpacing:'.12em',duration:3.2,ease:'none'},3.6)
-    .to({},{duration:1.2});
-
-  /* ---------- twist ---------- */
-  const tw = gsap.timeline({scrollTrigger:{trigger:'#twist',start:'top 60%',toggleActions:'play none none reverse'}});
+  var tw=gsap.timeline({scrollTrigger:{trigger:'#twist',start:'top 55%',toggleActions:'play none none reverse'}});
   tw.to('.twist .kicker',{opacity:1,duration:.6})
     .to('.twist .word',{opacity:1,y:0,rotate:0,duration:.5,stagger:.08,ease:'power3.out'},'-=.2')
     .to('.ella',{opacity:1,scale:1,rotate:-2,duration:.8,ease:'back.out(2)'},'+=.3')
     .to('#spark',{opacity:1,scale:1.15,duration:.4,ease:'back.out(3)'},'-=.3');
+  ScrollTrigger.create({trigger:'#twist',start:'top 30%',
+    onEnter:function(){ document.querySelector('.ella').classList.add('on'); },
+    onLeaveBack:function(){ document.querySelector('.ella').classList.remove('on'); }});
 
-  /* underline on the question */
-  ScrollTrigger.create({trigger:'#twist',start:'top 30%',onEnter:()=>document.querySelector('.ella').classList.add('on'),onLeaveBack:()=>document.querySelector('.ella').classList.remove('on')});
+  gsap.to('.step',{opacity:1,y:0,duration:.8,stagger:.15,ease:'power3.out',
+    scrollTrigger:{trigger:'.steps',start:'top 82%',toggleActions:'play none none reverse'}});
 
-  /* steps slide in */
-  gsap.to('.step',{opacity:1,x:0,duration:.8,stagger:.15,ease:'power3.out',
-    scrollTrigger:{trigger:'.steps',start:'top 78%',toggleActions:'play none none reverse'}});
+  /* ---------- parts that are rebuilt per layout (desktop / mobile) ---------- */
+  var mm=gsap.matchMedia();
+  mm.add({desktop:'(min-width:821px)',mobile:MOBILE},function(ctx){
+    var key=ctx.conditions.mobile?'mobile':'desktop';
+    var S=buildScene(LAYOUTS[key]);
 
-  /* background route in the turn section drifts */
-  gsap.to('.turn-bg path',{strokeDashoffset:-400,ease:'none',scrollTrigger:{trigger:'.turn',start:'top bottom',end:'bottom top',scrub:true}});
+    /* start state */
+    gsap.set([S.bin,S.metres,S.marker],{opacity:0});
+    gsap.set(S.bin,{y:16,transformOrigin:'50% 100%'});
+    gsap.set(S.stops,{opacity:0,scale:.75,transformOrigin:'50% 100%'});
+    gsap.set(S.badges,{opacity:0,scale:0,transformOrigin:'50% 50%'});
+    gsap.set(S.revShort,{strokeDasharray:S.shortLen,strokeDashoffset:S.shortLen});
+    gsap.set(S.revLong,{strokeDasharray:S.longLen,strokeDashoffset:S.longLen});
+
+    var travel={short:0,long:0};
+    function place(path,len,p){
+      var pt=path.getPointAtLength(len*p);
+      S.marker.setAttribute('cx',pt.x); S.marker.setAttribute('cy',pt.y);
+    }
+
+    var LONG_START=4.2, LONG_DUR=5;
+    var tl=gsap.timeline({
+      scrollTrigger:{trigger:'#scene',start:'top top',end:'+=340%',pin:true,scrub:.6,anticipatePin:1,invalidateOnRefresh:true}
+    });
+
+    /* act 1: the bin, ten metres, one short straight line */
+    tl.to(S.bin,{opacity:1,y:0,duration:.5,ease:'back.out(1.6)'},.7)
+      .to(S.marker,{opacity:1,duration:.2},.9)
+      .to(S.revShort,{strokeDashoffset:0,duration:1,ease:'none'},1)
+      .to(travel,{short:1,duration:1,ease:'none',onUpdate:function(){ place(S.shortPath,S.shortLen,travel.short); }},1)
+      .to(S.metres,{opacity:1,duration:.4},1.7)
+      .to(S.bin,{rotate:-5,duration:.2,yoyo:true,repeat:1},2)
+
+    /* act 2: the right choice. Same starting point, a road that never seems to end */
+      .to('#cap1',{opacity:0,y:-16,duration:.5},3.3)
+      .to(S.marker,{opacity:0,duration:.3},3.3)
+      .to([S.bin,S.metres,S.shortPath],{opacity:.35,duration:.5},3.5)
+      .to('#cap2',{opacity:1,duration:.6},3.8)
+      .set(travel,{long:0,onComplete:function(){ place(S.longPath,S.longLen,0); }},3.9)
+      .to(S.marker,{opacity:1,duration:.3},4)
+      .to(S.revLong,{strokeDashoffset:0,duration:LONG_DUR,ease:'none'},LONG_START)
+      .to(travel,{long:1,duration:LONG_DUR,ease:'none',onUpdate:function(){ place(S.longPath,S.longLen,travel.long); }},LONG_START);
+
+    /* each stop appears as the road reaches it, with its question mark */
+    S.stopAt.forEach(function(at,i){
+      var when=LONG_START+LONG_DUR*at;
+      tl.to(S.stops[i],{opacity:1,scale:1,duration:.5,ease:'back.out(1.7)'},when-.35)
+        .to(S.badges[i],{opacity:1,scale:1,duration:.35,ease:'back.out(3)'},when);
+    });
+    tl.to({}, {duration:1.2});
+
+    /* the road straightens into three steps */
+    var road=buildRoad(ROADS[key]);
+    var st={t:0};
+    road.render(0);
+    gsap.to(st,{t:1,ease:'power1.inOut',onUpdate:function(){ road.render(st.t); },
+      scrollTrigger:{trigger:'#road',start:'top 78%',end:'top 34%',scrub:.5}});
+
+    return function(){ /* gsap.matchMedia reverts tweens and triggers; the svgs are rebuilt on the next run */ };
+  });
 })();
 </script>
-<style>.ella.on::after{transform:scaleX(1);transition:transform .7s cubic-bezier(.7,0,.2,1) .2s}</style>
 </body>
 </html>
